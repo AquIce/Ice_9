@@ -1,0 +1,6 @@
+
+
+
+char_to_crypt_ascii = ascii(char_to_crypt)
+
+key_char_ascii = ascii(key_char)

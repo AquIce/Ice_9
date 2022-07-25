@@ -1,0 +1,83 @@
+
+new char = char(
+	(
+		ascii(
+			char to crypt
+		) + ascii(
+			key char
+		)
+	) // 3)
+
+add = char(
+	ascii(
+		char to crypt
+	) + 
+	ascii(
+		key char
+	)) % 3
+
+
+
+-->
+
+We have :
+- new char
+- key char
+- add
+
+We know that :
+char(
+		(
+			ascii(
+				char to crypt
+			) + 
+			ascii(
+				key char
+			)
+		) // 3 + ascii(add)
+	) = new char
+
+==>
+
+(
+	ascii(
+		char to crypt
+	) + 
+	ascii(
+		key char
+	)
+) // 3 + ascii(add) 
+= ascii(new char)
+
+==>
+
+(
+	ascii(
+		char to crypt
+	) + 
+	ascii(
+		key char
+	)
+) // 3 
+= ascii(new char) - ascii(add)
+
+==>
+
+ascii(
+	char to crypt
+) + 
+ascii(
+	key char
+)
+= 3(ascii(new char) - ascii(add))
+
+==>
+
+ascii(
+	char to crypt
+)
+= 3(ascii(new char) - ascii(add)) - ascii(key char)
+
+==>
+
+char to crypt = char(3(ascii(new char) - ascii(add)) - ascii(key char))
