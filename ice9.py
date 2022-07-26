@@ -77,9 +77,11 @@ class Ice9:
     if not os.path.exists(self._cut_to_point_reverse(file) + self.ext):
       with open(self._cut_to_point_reverse(file) + self.ext, 'x') as f: ...
     with open(self._cut_to_point_reverse(file) + self.ext, 'w') as f: f.write(new_ctnt_str + '.' + extens)
+    os.remove(file)
     
   def decrypt(self, file:str):
-    with open(self._cut_to_point_reverse(file) + self.ext, 'r') as f: content = f.read()
+    encrypted_file_name = self._cut_to_point_reverse(file) + self.ext
+    with open(encrypted_file_name, 'r') as f: content = f.read()
     ext = '.' + content.split('.')[-1]
     ctnt = content.split('.')[:-1]
     ctnt = ctnt[0]
@@ -95,12 +97,17 @@ class Ice9:
     for i in range(len(ready_to_dec)):
       while k >= len(self.key):
         k -= len(self.key)
-      non_crypted_char = chr(3 * (self.get_ascii_value(ready_to_dec[i][0]) + self.get_ascii_value(ready_to_dec[i][1])) - self.get_ascii_value(self.key[k]))
+      non_crypted_char = chr(self.get_ascii_value(ready_to_dec[i][0]) * 3 + self.get_ascii_value(ready_to_dec[i][1]) - self.get_ascii_value(self.key[k]))
       final += non_crypted_char
       k += 1
-    print(final)
+    with open(file, 'x') as f: f.write(final)
+    os.remove(encrypted_file_name)
+    
+  def secured(self, file_to_encrypt:str):
+    ice.crypt('C:\\Users\\timep\\Bureau\\Desk\\Code\\Ice_9\\' + file_to_encrypt)
+    input('>>>')
+    ice.decrypt('C:\\Users\\timep\\Bureau\\Desk\\Code\\Ice_9\\' + file_to_encrypt)
 
 ice = Ice9()
 # ice.list_files()
-ice.crypt('C:\\Users\\timep\\Bureau\\Desk\\Code\\Ice_9\\a.blurp')
-ice.decrypt('C:\\Users\\timep\\Bureau\\Desk\\Code\\Ice_9\\a.ice9')
+ice.secured('test.shit')

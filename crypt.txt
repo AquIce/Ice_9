@@ -1,83 +1,50 @@
 
-new char = char(
-	(
-		ascii(
-			char to crypt
-		) + ascii(
-			key char
-		)
-	) // 3)
-
-add = char(
-	ascii(
-		char to crypt
-	) + 
-	ascii(
-		key char
-	)) % 3
 
 
+char_to_crypt_ascii = ascii(char_to_crypt)
 
--->
+key_char_ascii = ascii(key_char)
+
+ascii_sum = char_to_crypt_ascii + key_char_ascii
+
+=> ascii_sum = ascii(char_to_crypt) + ascii(key_char)
+
+new_char_ascii = ascii_sum // 3
+
+=> new_char_ascii = (ascii(char_to_crypt) + ascii(key_char)) // 3
+
+final_char = chr(new_char_ascii)
+
+=> final_char = chr((ascii(char_to_crypt) + ascii(key_char)) // 3)
+
+modulo = chr((ascii(char_to_crypt) + ascii(key_char)) % 3)
+
+
+->
 
 We have :
-- new char
-- key char
-- add
+- final_char
+- modulo
+- key_char 
 
-We know that :
-char(
-		(
-			ascii(
-				char to crypt
-			) + 
-			ascii(
-				key char
-			)
-		) // 3 + ascii(add)
-	) = new char
+We want :
+- char_to_crypt
 
-==>
+Example with :
+- final_char = f
+- modulo = m
+- key_char = k
 
-(
-	ascii(
-		char to crypt
-	) + 
-	ascii(
-		key char
-	)
-) // 3 + ascii(add) 
-= ascii(new char)
+f = chr((ascii(char_to_crypt) + ascii(k)) // 3)
+m = chr((ascii(char_to_crypt) + ascii()) % 3)
 
-==>
+ascii(f) = (ascii(char_to_crypt) + ascii(k)) // 3
+ascii(m) = (ascii(char_to_crypt) + ascii(k)) % 3
+ascii(f) * 3 + ascii(m) = ascii(char_to_crypt) + ascii(k)
+ascii(f) * 3 + ascii(m) - ascii(k) = ascii(char_to_crypt)
 
-(
-	ascii(
-		char to crypt
-	) + 
-	ascii(
-		key char
-	)
-) // 3 
-= ascii(new char) - ascii(add)
+=>
 
-==>
+char_to_crypt = chr(ascii(f) * 3 + ascii(m) - ascii(k))
 
-ascii(
-	char to crypt
-) + 
-ascii(
-	key char
-)
-= 3(ascii(new char) - ascii(add))
-
-==>
-
-ascii(
-	char to crypt
-)
-= 3(ascii(new char) - ascii(add)) - ascii(key char)
-
-==>
-
-char to crypt = char(3(ascii(new char) - ascii(add)) - ascii(key char))
+non_crypted_char = chr(self.get_ascii_value(ready_to_dec[i][0]) * 3 + get_ascii_value(ready_to_dec[i][1]) - get_ascii_value(key[k]))
