@@ -1,0 +1,11 @@
+Hi,
+
+This is an Ice_9 test file :)
+
+Charset test :
+  abcdefghijklmnopqrstuvwxyz
+  ABCDEFGHIJKLMNOPQRSTUVWXYZ
+  0123456789
+  ,.-'^§<°+"*ç%&/()=?`!_:;>\¦@#°§¬|¢´~][{}
+  
+[END OF FILE]
