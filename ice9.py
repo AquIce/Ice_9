@@ -5,7 +5,6 @@
 
 import os
 import random
-from xml.etree.ElementPath import ops
 
 class Ice9:
   def __init__(self, search_key_file:str=None,key_length:int=256, extension:str='.ice9', keyfilename:str='key.log') -> None:
@@ -23,14 +22,12 @@ class Ice9:
     if os.getcwd()[0] in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ': 
       while(len(os.getcwd()) > 3): os.chdir('..')
 
-  def get_drives(self) -> list:
-    drives = [chr(i) + ':' for i in range(65, 91) if os.path.isdir(chr(i) + ':')]
-    return drives
+  def get_drives(self) -> list :
+    return [chr(i) + ':' for i in range(65, 91) if os.path.isdir(chr(i) + ':')]
 
-  def list_files(self) -> None:
+  def list_files(self) -> None :
     base_dir = self.get_drives()
-    for i in base_dir:
-      self.in_dir(i)
+    for i in base_dir: self.in_dir(i)
 
   def in_dir(self, dir) -> None:
     for i in os.listdir(dir):
@@ -41,19 +38,20 @@ class Ice9:
 
   def set_key(self) -> None:
     for i in range(self.key_len):
-      ind = random.randint(0, len(self.charset) - 1)
-      self.key += self.charset[ind]
+      index = random.randint(0, len(self.charset) - 1)
+      self.key += self.charset[index]
 
   def get_ascii_value(self, character) -> int:
-    for i in range(1000):
-      if chr(i) == character:
-        return i
+    i = 0
+    while chr(i) != character:
+      i += 1
+    return chr(i)
 
   def _cut_to_point_reverse(self, string_to_cut:str) -> str:
-    ind = 0
+    index = 0
     for i in range(len(string_to_cut) - 1, -1, -1):
-      if string_to_cut[i] == '.': ind = i; break
-    return string_to_cut[0:ind]
+      if string_to_cut[i] == '.': index = i; break
+    return string_to_cut[0:index]
 
   def crypt(self, file:str):
     with open(file, 'r') as f: content = f.read() # Load the content
@@ -103,11 +101,11 @@ class Ice9:
     with open(file, 'x') as f: f.write(final)
     os.remove(encrypted_file_name)
     
-  def secured(self, file_to_encrypt:str):
+  def test(self, file_to_encrypt:str):
     ice.crypt('C:\\Users\\timep\\Bureau\\Desk\\Code\\Ice_9\\' + file_to_encrypt)
     input('>>>')
     ice.decrypt('C:\\Users\\timep\\Bureau\\Desk\\Code\\Ice_9\\' + file_to_encrypt)
 
 ice = Ice9()
 # ice.list_files()
-ice.secured('test.shit')
+ice.test('test.txt')
