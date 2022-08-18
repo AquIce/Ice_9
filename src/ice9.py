@@ -101,7 +101,7 @@ class Ice9:
     with open(file, 'x') as f: f.write(final)
     os.remove(encrypted_file_name)
     
-  def test(self, file_to_encrypt:str):
-    ice.crypt('C:\\Users\\timep\\Bureau\\Desk\\Code\\Ice_9\\' + file_to_encrypt)
+  def run(self, file_to_encrypt:str):
+    ice.crypt(file_to_encrypt)
     input('>>>')
-    ice.decrypt('C:\\Users\\timep\\Bureau\\Desk\\Code\\Ice_9\\' + file_to_encrypt)
+    ice.decrypt(file_to_encrypt)
